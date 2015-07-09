@@ -9,6 +9,7 @@ hash = {};
 delete data["crs"];
 
 features = data["features"];
+
 for(i = 0; i < features.length; i++) {
   feature = features[i];
   tzid    = feature["properties"]["TZID"];
