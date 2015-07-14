@@ -8,5 +8,5 @@ gdal_rasterize -a INDEX -l OGRGeoJSON -ts 24576 12288 -ot UInt16 \
   tz_world_indexed.json tz_world.tiff
 convert tz_world.tiff tz_world.pgm
 node quadtree
-rm -rf tz_world.zip world tz_world.json tz_world_indexed.json tz_world.tiff \
-  tz_world.pgm
+rm -rf tz_world.json tz_world.zip tz_world.pgm tz_world_indexed.json \
+  tz_world.tiff world

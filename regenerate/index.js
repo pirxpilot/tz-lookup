@@ -35,5 +35,5 @@ list.push(
   "Etc/GMT-8",  "Etc/GMT-9",  "Etc/GMT-10", "Etc/GMT-11", "Etc/GMT-12"
 );
 
-fs.writeFileSync("tzid.json", JSON.stringify(list));
+fs.writeFileSync("../zones.json", JSON.stringify(list));
 fs.writeFileSync("tz_world_indexed.json", JSON.stringify(data));

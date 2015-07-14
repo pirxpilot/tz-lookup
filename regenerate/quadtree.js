@@ -1,5 +1,10 @@
 var COARSE_HEIGHT, COARSE_WIDTH, FINE_HEIGHT, FINE_WIDTH, LOSSY_THRESHOLD,
-    PIXEL_HEIGHT, PIXEL_WIDTH, data, fs, pack, pixel, quadtree, tzids;
+    MAX_NODES, PIXEL_HEIGHT, PIXEL_WIDTH, binary, data, fs, pack, pixel,
+    quadtree, tzids;
+
+fs    = require("fs");
+data  = fs.readFileSync("tz_world.pgm").slice(21);
+tzids = require("../zones.json").length;
 
 /* The coarse dimensions *must* be a multiple of 48x1, in order to efficiently
  * accomodate the oceanic zones, and *should* be a multiple of 2x1, in order to
@@ -11,10 +16,7 @@ FINE_HEIGHT     = 2;
 PIXEL_WIDTH     = 24576;
 PIXEL_HEIGHT    = 12288;
 LOSSY_THRESHOLD = 15.0 / 16.0;
-
-fs    = require("fs");
-data  = fs.readFileSync("tz_world.pgm").slice(21);
-tzids = require("./tzid.json").length;
+MAX_NODES       = 0x10000 - tzids;
 
 pixel = function(x, y) {
   return (x >= 0 && x < PIXEL_WIDTH && y >= 0 && y < PIXEL_HEIGHT) ?
@@ -170,7 +172,7 @@ pack = (function() {
   };
 
   return function(root) {
-    var i, index, j, k, l, list, node, nodes, offset;
+    var i, index, j, k, l, list, node, nodes, offset, t;
 
     /* Recursively generate the node index. */
     index = [];
@@ -191,15 +193,71 @@ pack = (function() {
       for(k = 0; k < nodes.length; k++) {
         node = nodes[k];
         for(l = node.length; l--; ) {
-          node[l] = offset[node[l] >> 26] + (node[l] & 0x3ffffff) - i;
+          t = node[l];
+
+          if(t & 0xfc000000) {
+            t = offset[t >> 26] + (t & 0x3ffffff) - i;
+            if(t >= MAX_NODES) {
+              throw new Error("node offset too great");
+            }
+          }
+
+          else {
+            t = MAX_NODES + (t & 0x3ffffff);
+            if(t >= 0x10000) {
+              throw new Error("oops, I can't add");
+            }
+          }
+
+          node[l] = t;
         }
 
         list[i++] = node;
       }
     }
+
+    return list;
   };
 })();
 
-pack(
-  quadtree(0, 0, PIXEL_WIDTH, PIXEL_HEIGHT, COARSE_WIDTH, COARSE_HEIGHT)
+binary = function(nodes) {
+  var buffer, i, j, node, offset;
+
+  buffer = new Buffer(
+    1 * COARSE_WIDTH * COARSE_HEIGHT * 2 +
+    (nodes.length - 1) * FINE_WIDTH * FINE_HEIGHT * 2
+  );
+  offset = 0;
+
+  for(i = 0; i < nodes.length; i++) {
+    node = nodes[i];
+
+    for(j = 0; j < node.length; j++) {
+      buffer.writeUInt16BE(node[j], offset);
+      offset += 2;
+    }
+  }
+
+  if(offset !== buffer.length) {
+    console.log(offset, buffer.length);
+    throw new Error("oops, allocated the wrong buffer length");
+  }
+
+  return buffer;
+};
+
+fs.writeFileSync(
+  "../tz.bin",
+  binary(
+    pack(
+      quadtree(
+        0,
+        0,
+        PIXEL_WIDTH,
+        PIXEL_HEIGHT,
+        COARSE_WIDTH,
+        COARSE_HEIGHT
+      )
+    )
+  )
 );
