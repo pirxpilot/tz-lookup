@@ -1,3 +1,4 @@
+"use strict";
 var data, feature, features, fs, hash, i, list, tzid;
 
 fs = require("fs");

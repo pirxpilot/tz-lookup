@@ -1,6 +1,7 @@
+"use strict";
 var COARSE_HEIGHT, COARSE_WIDTH, FINE_HEIGHT, FINE_WIDTH, LOSSY_THRESHOLD,
-    MAX_NODES, PIXEL_HEIGHT, PIXEL_WIDTH, binary, data, fs, pack, pixel,
-    quadtree, tzids;
+    MAX_NODES, PIXEL_HEIGHT, PIXEL_WIDTH, data, fs, pack, pixel, quadtree,
+    tzids;
 
 fs    = require("fs");
 data  = fs.readFileSync("tz_world.pgm").slice(21);
@@ -29,22 +30,24 @@ quadtree = function(x, y, width, height, cols, rows) {
 
   /* Generate a histogram of which timezones are covered in this area. */
   histogram = new Uint32Array(tzids);
+  total     = 0;
+
   for(j = 0; j < height; j++) {
     for(i = 0; i < width; i++) {
       tzid = pixel(x + i, y + j);
 
       if(~tzid) {
         histogram[tzid]++;
+        total++;
       }
     }
   }
 
   /* Build a list of timezones covered, and the count of pixels covered. */
-  total = 0;
   list  = [];
+
   for(i = 0; i < tzids; i++) {
-    if(histogram[i] > 0) {
-      total += histogram[i];
+    if(histogram[i]) {
       list.push(i);
     }
   }
@@ -57,16 +60,23 @@ quadtree = function(x, y, width, height, cols, rows) {
     return tzids - 25 + Math.round(24.0 * (x + 0.5 * width) / PIXEL_WIDTH);
   }
 
+  /* If this region only has a single timezone, use it. */
+  if(list.length === 1) {
+    return list[0];
+  }
+
   /* Sort the list of timezones covered in descending order. */
   list.sort(function(a, b) {
     return histogram[b] - histogram[a];
   });
 
-  /* If this region only contains a single timezone, or else is so
-   * overwhelmingly covered by a single timezone such that we don't care about
-   * the other timezones, then use that timezone. */
-  if(list.length === 1 ||
-     histogram[list[0]] >= total * LOSSY_THRESHOLD) {
+  if(histogram[list[0]] < histogram[list[1]]) {
+    throw new Error("oops, I sorted wrong");
+  }
+
+  /* If the largest timezone in this region covers an overwhelming majority of
+   * the pixels, then just use it. */
+  if(histogram[list[0]] >= total * LOSSY_THRESHOLD) {
     return list[0];
   }
 
@@ -90,26 +100,7 @@ quadtree = function(x, y, width, height, cols, rows) {
 };
 
 pack = (function() {
-  var equal, recurse;
-
-  /* Are two arrays equal? */
-  equal = function(a, b) {
-    var i;
-
-    i = a.length;
-
-    if(i !== b.length) {
-      return false;
-    }
-
-    while(i--) {
-      if(a[i] !== b[i]) {
-        return false;
-      }
-    }
-
-    return true;
-  };
+  var binary, flatten, recurse;
 
   /* `recurse()` returns a number; the low 26 bits represent a position for a
    * given tree depth, and the 6 bits above that represent the depth from the
@@ -171,12 +162,8 @@ pack = (function() {
     return (depth << 26) | (i & 0x3ffffff);
   };
 
-  return function(root) {
-    var i, index, j, k, l, list, node, nodes, offset, t;
-
-    /* Recursively generate the node index. */
-    index = [];
-    recurse(root, index);
+  flatten = function(index) {
+    var i, j, k, l, list, node, nodes, offset, t;
 
     /* Compute index offsets for each depth. */
     offset = new Array(index.length + 1);
@@ -203,7 +190,7 @@ pack = (function() {
           }
 
           else {
-            t = MAX_NODES + (t & 0x3ffffff);
+            t = MAX_NODES + t;
             if(t >= 0x10000) {
               throw new Error("oops, I can't add");
             }
@@ -218,46 +205,52 @@ pack = (function() {
 
     return list;
   };
-})();
 
-binary = function(nodes) {
-  var buffer, i, j, node, offset;
+  binary = function(nodes) {
+    var buffer, i, j, node, offset;
 
-  buffer = new Buffer(
-    1 * COARSE_WIDTH * COARSE_HEIGHT * 2 +
-    (nodes.length - 1) * FINE_WIDTH * FINE_HEIGHT * 2
-  );
-  offset = 0;
+    buffer = new Buffer(
+      1 * COARSE_WIDTH * COARSE_HEIGHT * 2 +
+      (nodes.length - 1) * FINE_WIDTH * FINE_HEIGHT * 2
+    );
+    offset = 0;
 
-  for(i = 0; i < nodes.length; i++) {
-    node = nodes[i];
+    for(i = 0; i < nodes.length; i++) {
+      node = nodes[i];
 
-    for(j = 0; j < node.length; j++) {
-      buffer.writeUInt16BE(node[j], offset);
-      offset += 2;
+      for(j = 0; j < node.length; j++) {
+        buffer.writeUInt16BE(node[j], offset);
+        offset += 2;
+      }
     }
-  }
 
-  if(offset !== buffer.length) {
-    console.log(offset, buffer.length);
-    throw new Error("oops, allocated the wrong buffer length");
-  }
+    if(offset !== buffer.length) {
+      console.log(offset, buffer.length);
+      throw new Error("oops, allocated the wrong buffer length");
+    }
 
-  return buffer;
-};
+    return buffer;
+  };
+
+  return function(root) {
+    var index;
+
+    index = [];
+    recurse(root, index);
+    return binary(flatten(index));
+  };
+})();
 
 fs.writeFileSync(
   "../tz.bin",
-  binary(
-    pack(
-      quadtree(
-        0,
-        0,
-        PIXEL_WIDTH,
-        PIXEL_HEIGHT,
-        COARSE_WIDTH,
-        COARSE_HEIGHT
-      )
+  pack(
+    quadtree(
+      0,
+      0,
+      PIXEL_WIDTH,
+      PIXEL_HEIGHT,
+      COARSE_WIDTH,
+      COARSE_HEIGHT
     )
   )
 );
