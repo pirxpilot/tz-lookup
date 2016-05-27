@@ -42,6 +42,7 @@ describe("tz-lookup", function() {
   test( 38.6043,  -90.2417,              "America/Chicago");
   test( 41.1591, -104.8261,               "America/Denver");
   test( 35.1991, -111.6348,              "America/Phoenix");
+  test( 36.9147, -111.4558,              "America/Phoenix");
   test( 43.1432, -115.6750,                "America/Boise");
   test( 47.5886, -122.3382,          "America/Los_Angeles");
   test( 58.3168, -134.4397,               "America/Juneau");
