@@ -24,6 +24,8 @@ function errorTest(lat, lon) {
 }
 
 describe("tz-lookup", () => {
+  before(done => tz.init(done));
+
   /* These tests are hand-crafted for specific locations. */
   test( 40.7092,  -74.0151, "America/New_York");
   test( 42.3668,  -71.0546, "America/New_York");

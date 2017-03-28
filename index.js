@@ -1,6 +1,4 @@
 "use strict";
-const fs            = require("fs"),
-      path          = require("path");
 
 const TIMEZONE_LIST = require("./tz.json"),
       COARSE_WIDTH  = 48,
@@ -9,20 +7,9 @@ const TIMEZONE_LIST = require("./tz.json"),
       FINE_HEIGHT   = 2;
 
 
-function fromFile(path) {
-  var buffer = fs.readFileSync(path);
-  var len = buffer.length;
-  var ab = new ArrayBuffer(len);
+var loadData = require('./lib/load-data');
 
-  var view = new Uint8Array(ab);
-
-  for (var i = 0; i < len; ++i) {
-    view[i] = buffer[i];
-  }
-  return ab;
-}
-
-const DATA = new DataView(fromFile(path.join(__dirname, "./tz.bin")));
+var DATA;
 
 function at(index) {
   return DATA.getUint16(index, false);
@@ -64,4 +51,12 @@ function tzlookup(lat, lon) {
   return TIMEZONE_LIST[i - LEN];
 }
 
+function init(fn) {
+  loadData(function(err, data) {
+    DATA = data;
+    fn(err);
+  });
+}
+
+tzlookup.init = init;
 module.exports = tzlookup;
