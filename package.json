@@ -16,11 +16,16 @@
     "url": "git://github.com/darkskyapp/tz-lookup.git"
   },
   "devDependencies": {
+    "browserify": "^14.1.0",
     "chai": "*",
+    "jshint": "^2.9.4",
     "mocha": "*"
   },
   "scripts": {
     "test": "mocha"
+  },
+  "browser": {
+    "./lib/load-data": "./lib/browser-load-data"
   },
   "files": [
     "index.js",
