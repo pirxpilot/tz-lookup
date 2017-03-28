@@ -1,12 +1,34 @@
 "use strict";
 const fs            = require("fs"),
-      path          = require("path"),
-      DATA          = fs.readFileSync(path.join(__dirname, "./tz.bin")),
-      TIMEZONE_LIST = require("./tz.json"),
+      path          = require("path");
+
+const TIMEZONE_LIST = require("./tz.json"),
       COARSE_WIDTH  = 48,
       COARSE_HEIGHT = 24,
       FINE_WIDTH    = 2,
       FINE_HEIGHT   = 2;
+
+
+function fromFile(path) {
+  var buffer = fs.readFileSync(path);
+  var len = buffer.length;
+  var ab = new ArrayBuffer(len);
+
+  var view = new Uint8Array(ab);
+
+  for (var i = 0; i < len; ++i) {
+    view[i] = buffer[i];
+  }
+  return ab;
+}
+
+const DATA = new DataView(fromFile(path.join(__dirname, "./tz.bin")));
+
+function at(index) {
+  return DATA.getUint16(index, false);
+}
+
+const LEN = 65536 - TIMEZONE_LIST.length;
 
 function tzlookup(lat, lon) {
   /* Make sure lat/lon are valid numbers. (It is unusual to check for the
@@ -26,20 +48,20 @@ function tzlookup(lat, lon) {
       u = x|0,
       v = y|0,
       t = -1,
-      i = DATA.readUIntBE((v * COARSE_WIDTH + u) * 2, 2);
+      i = at((v * COARSE_WIDTH + u) * 2);
 
   /* Recurse until we hit a leaf node. */
-  while(i < 65536 - TIMEZONE_LIST.length) {
+  while(i < LEN) {
     x = ((x - u) % 1.0) * FINE_WIDTH;
     y = ((y - v) % 1.0) * FINE_HEIGHT;
     u = x|0;
     v = y|0;
     t = t + i + 1;
-    i = DATA.readUIntBE((COARSE_WIDTH * COARSE_HEIGHT + (t * FINE_HEIGHT + v) * FINE_WIDTH + u) * 2, 2);
+    i = at((COARSE_WIDTH * COARSE_HEIGHT + (t * FINE_HEIGHT + v) * FINE_WIDTH + u) * 2);
   }
 
   /* Once we hit a leaf, return the relevant timezone. */
-  return TIMEZONE_LIST[i - (65536 - TIMEZONE_LIST.length)];
+  return TIMEZONE_LIST[i - LEN];
 }
 
 module.exports = tzlookup;
