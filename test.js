@@ -1,4 +1,7 @@
 "use strict";
+
+/*jshint esversion: 6, mocha: true */
+
 const expect = require("chai").expect,
       tz     = require("./");
 
@@ -11,7 +14,7 @@ function test(lat, lon, tzid) {
 function errorTest(lat, lon) {
   it("should throw an error given " + lat + ", " + lon, () => {
     try {
-      tz(lat, lon)
+      tz(lat, lon);
     }
     catch(ex) {
       expect(ex).

@@ -1,6 +1,6 @@
 "use strict";
 
-const TIMEZONE_LIST = require("./data/tz.json"),
+var TIMEZONE_LIST = require("./data/tz.json"),
       COARSE_WIDTH  = 48,
       COARSE_HEIGHT = 24,
       FINE_WIDTH    = 2,
@@ -15,7 +15,7 @@ function at(index) {
   return DATA.getUint16(index, false);
 }
 
-const LEN = 65536 - TIMEZONE_LIST.length;
+var LEN = 65536 - TIMEZONE_LIST.length;
 
 function tzlookup(lat, lon) {
   /* Make sure lat/lon are valid numbers. (It is unusual to check for the
@@ -30,7 +30,7 @@ function tzlookup(lat, lon) {
   /* The root node of the tree is wider than a normal node, acting essentially
    * as a "flattened" few layers of the tree. This saves a bit of overhead,
    * since the topmost nodes will probably all be full. */
-  let x = (180.0 + lon) * COARSE_WIDTH  / 360.00000000000006,
+  var x = (180.0 + lon) * COARSE_WIDTH  / 360.00000000000006,
       y = ( 90.0 - lat) * COARSE_HEIGHT / 180.00000000000003,
       u = x|0,
       v = y|0,
