@@ -1,9 +1,19 @@
 "use strict";
 
 /*jshint esversion: 6, mocha: true */
+/* global chai */
 
-const expect = require("chai").expect,
-      tz     = require("./");
+var expect, tz;
+
+if (typeof chai === 'undefined') {
+  expect = require("chai").expect;
+  tz     = require("./");
+} else {
+
+  expect = chai.expect;
+  tz     = require("tz-lookup");
+}
+
 
 function test(lat, lon, tzid) {
   it("should return \"" + tzid + "\" given " + lat + ", " + lon, () => {
