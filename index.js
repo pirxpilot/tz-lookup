@@ -1,6 +1,6 @@
 "use strict";
 
-const TIMEZONE_LIST = require("./tz.json"),
+const TIMEZONE_LIST = require("./data/tz.json"),
       COARSE_WIDTH  = 48,
       COARSE_HEIGHT = 24,
       FINE_WIDTH    = 2,
