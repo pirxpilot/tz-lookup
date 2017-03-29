@@ -4,16 +4,13 @@ var TIMEZONE_LIST = require("./data/tz.json"),
       COARSE_WIDTH  = 48,
       COARSE_HEIGHT = 24,
       FINE_WIDTH    = 2,
-      FINE_HEIGHT   = 2;
+      FINE_HEIGHT   = 2,
+      COARSE = COARSE_WIDTH * COARSE_HEIGHT;
 
 
 var loadData = require('./lib/load-data');
 
 var DATA;
-
-function at(index) {
-  return DATA.getUint16(index, false);
-}
 
 var LEN = 65536 - TIMEZONE_LIST.length;
 
@@ -35,7 +32,7 @@ function tzlookup(lat, lon) {
       u = x|0,
       v = y|0,
       t = -1,
-      i = at((v * COARSE_WIDTH + u) * 2);
+      i = DATA[v * COARSE_WIDTH + u];
 
   /* Recurse until we hit a leaf node. */
   while(i < LEN) {
@@ -44,7 +41,7 @@ function tzlookup(lat, lon) {
     u = x|0;
     v = y|0;
     t = t + i + 1;
-    i = at((COARSE_WIDTH * COARSE_HEIGHT + (t * FINE_HEIGHT + v) * FINE_WIDTH + u) * 2);
+    i = DATA[COARSE + (t * FINE_HEIGHT + v) * FINE_WIDTH + u];
   }
 
   /* Once we hit a leaf, return the relevant timezone. */
