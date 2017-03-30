@@ -1,3 +1,6 @@
+This is a fork of [tz-lookup] module. It's been gently touched to enable
+client side (in browser) usage.
+
 tz-lookup
 =========
 
@@ -61,3 +64,4 @@ To the extent possible by law, The Dark Sky Company, LLC has [waived all
 copyright and related or neighboring rights][cc0] to this library.
 
 [cc0]: http://creativecommons.org/publicdomain/zero/1.0/
+[tz-lookup]: https://www.npmjs.com/package/tz-lookup
