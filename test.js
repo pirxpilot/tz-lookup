@@ -1,6 +1,19 @@
 "use strict";
-const expect = require("chai").expect,
-      tz     = require("./");
+
+/*jshint esversion: 6, mocha: true */
+/* global chai */
+
+var expect, tz;
+
+if (typeof chai === 'undefined') {
+  expect = require("chai").expect;
+  tz     = require("./");
+} else {
+
+  expect = chai.expect;
+  tz     = require("tz-lookup");
+}
+
 
 function test(lat, lon, tzid) {
   it("should return \"" + tzid + "\" given " + lat + ", " + lon, () => {
@@ -11,7 +24,7 @@ function test(lat, lon, tzid) {
 function errorTest(lat, lon) {
   it("should throw an error given " + lat + ", " + lon, () => {
     try {
-      tz(lat, lon)
+      tz(lat, lon);
     }
     catch(ex) {
       expect(ex).
@@ -24,6 +37,8 @@ function errorTest(lat, lon) {
 }
 
 describe("tz-lookup", () => {
+  before(done => tz.init(done));
+
   /* These tests are hand-crafted for specific locations. */
   test( 40.7092,  -74.0151, "America/New_York");
   test( 42.3668,  -71.0546, "America/New_York");
