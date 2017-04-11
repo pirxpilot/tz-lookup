@@ -6,7 +6,6 @@ module.exports=["Africa/Abidjan","Africa/Accra","Africa/Addis_Ababa","Africa/Alg
 module.exports = loadData;
 
 /*jshint browser: true */
-/* global Promise */
 
 // expect tz.bin URL defined in #tz-lookup element
 function getDataUrl() {
@@ -28,18 +27,6 @@ function fromArrayBuffer(ab) {
   return uints;
 }
 
-function fromBlob(blob) {
-  function promise(resolve) {
-    var reader = new FileReader();
-    reader.addEventListener("loadend", function() {
-      resolve(fromArrayBuffer(reader.result));
-    });
-    reader.readAsArrayBuffer(blob);
-  }
-
-  return new Promise(promise);
-}
-
 function loadData(fn) {
   var url = getDataUrl();
   if (!url) {
@@ -47,10 +34,10 @@ function loadData(fn) {
   }
   fetch(url, { mode: 'cors' })
     .then(function(res) {
-      return res.blob();
+      return res.arrayBuffer();
     })
-    .then(fromBlob)
-    .then(function(data) {
+    .then(function(ab) {
+      var data = fromArrayBuffer(ab);
       fn(null, data);
     })
     .catch(fn);
