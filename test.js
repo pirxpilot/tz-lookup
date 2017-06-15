@@ -63,6 +63,11 @@ describe("tz-lookup", () => {
   test( 42.0000,  -87.5000, "America/Chicago");
   test( 36.9147, -111.4558, "America/Phoenix");
   test( 46.1328,  -64.7714, "America/Moncton");
+  // Cave Point County Park 44°55′50.8″N, 87°10′26.8″W
+  test( 44.9308, -87.1741, "America/Chicago");
+  // Whitefish Dunes State Park 44°55′40.7″N, 87°11′07.0″W
+  test( 44.9280, -87.1853, "America/Chicago");
+
 
   /* Sanity-check international waters. */
   test(-65, -180, "Etc/GMT+12");
