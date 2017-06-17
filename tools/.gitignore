@@ -1,0 +1,11 @@
+*.pgm
+*.pbm
+*.tiff
+*.zip
+*.bin
+*.shp
+*.shx
+dist
+ne_10m_populated_places_simple.json
+tz.json
+tz_indexed.json
