@@ -67,7 +67,8 @@ describe("tz-lookup", () => {
   test( 44.9308, -87.1741, "America/Chicago");
   // Whitefish Dunes State Park 44°55′40.7″N, 87°11′07.0″W
   test( 44.9280, -87.1853, "America/Chicago");
-
+  // Port au Choix, NL, Canada
+  test( 50.7029, -57.3511, "America/St_Johns");
 
   /* Sanity-check international waters. */
   test(-65, -180, "Etc/GMT+12");
