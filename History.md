@@ -1,4 +1,11 @@
 
+7.0.2 / 2017-06-16
+==================
+
+ * fix for Port au Choix, NL, Canada
+ * fix Whitefish Dunes State Park, Wisconsin
+ * use Makefile to build tz.bin file
+
 7.0.1 / 2017-04-11
 ==================
 
