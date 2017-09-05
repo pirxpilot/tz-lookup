@@ -1,4 +1,11 @@
 
+7.0.3 / 2017-09-04
+==================
+
+ * fix TZ for Saint-Germain-des-Vaux, France
+ * fix TZ for Malören, Kalix Archipelago
+ * fix TX for North Rim Cape Royal
+
 7.0.2 / 2017-06-16
 ==================
 
