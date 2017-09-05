@@ -72,6 +72,9 @@ describe("tz-lookup", () => {
   // Grand Canyon North Rim
   test( 36.2105, -112.0610, "America/Phoenix"); // North Rim
   test( 36.1170, -111.9501, "America/Phoenix"); // Cape Royal
+  // Malören, Kalix Archipelago
+  test( 65.5280,   23.5570, "Europe/Stockholm");
+
 
   /* Sanity-check international waters. */
   test(-65, -180, "Etc/GMT+12");

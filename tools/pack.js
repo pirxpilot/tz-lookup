@@ -146,6 +146,7 @@ function coarse() {
   // more fixes
   force_urban(44.9308, -87.1741, urban_data);
   force_urban(50.7029, -57.3511, urban_data);
+  force_urban(65.5280,   23.5570, urban_data); // Malören, Kalix Archipelago
 
   const tz_data = Buffer.allocUnsafe((width / 4) * (height / 2) * 2);
   for(let y = 0; y < 2; y++) {
