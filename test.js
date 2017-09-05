@@ -74,6 +74,8 @@ describe("tz-lookup", () => {
   test( 36.1170, -111.9501, "America/Phoenix"); // Cape Royal
   // Malören, Kalix Archipelago
   test( 65.5280,   23.5570, "Europe/Stockholm");
+  // Saint-Germain-des-Vaux, France
+  test( 49.7261,   -1.9104, "Europe/Paris");
 
 
   /* Sanity-check international waters. */
