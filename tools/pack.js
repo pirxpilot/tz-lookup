@@ -141,6 +141,7 @@ function coarse() {
   force_urban(36.8381,  -84.8500, urban_data);
   force_urban(37.9643,  -86.7453, urban_data);
   force_urban(36.9147, -111.4558, urban_data);
+  force_urban(36.1170, -111.9501, urban_data); // North Rim
 
   // more fixes
   force_urban(44.9308, -87.1741, urban_data);

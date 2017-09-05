@@ -69,6 +69,9 @@ describe("tz-lookup", () => {
   test( 44.9280, -87.1853, "America/Chicago");
   // Port au Choix, NL, Canada
   test( 50.7029, -57.3511, "America/St_Johns");
+  // Grand Canyon North Rim
+  test( 36.2105, -112.0610, "America/Phoenix"); // North Rim
+  test( 36.1170, -111.9501, "America/Phoenix"); // Cape Royal
 
   /* Sanity-check international waters. */
   test(-65, -180, "Etc/GMT+12");
