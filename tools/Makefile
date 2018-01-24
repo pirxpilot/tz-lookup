@@ -2,7 +2,7 @@ all: tz.bin
 
 # get data
 
-VERSION=2017a
+VERSION=2017c
 CULTURAL_URL=http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural
 
 timezones.geojson.zip:
