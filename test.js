@@ -284,7 +284,7 @@ describe("tz-lookup", () => {
   test( 63.7417, -115.2235, "America/Yellowknife");
   test( 44.0343,  123.8136, "Asia/Shanghai");
   test( 81.6018,  -59.8101, "America/Godthab");
-  test( 51.5641,  -63.8453, "America/Montreal");
+  test( 51.5641,  -63.8453, "America/Toronto");
   test(-38.1635,  -57.7626, "America/Argentina/Buenos_Aires");
   test( 36.1970, -107.8392, "America/Denver");
   test( 26.0985, -105.9614, "America/Monterrey");
@@ -354,7 +354,7 @@ describe("tz-lookup", () => {
   test( 35.4466,   85.8077, "Asia/Shanghai");
   test( 15.3113,   32.8385, "Africa/Khartoum");
   test( -0.9303,  -61.5420, "America/Manaus");
-  test( 65.1811,  -85.3929, "America/Coral_Harbour");
+  test( 65.1811,  -85.3929, "America/Atikokan");
   test( 41.3979,  109.2824, "Asia/Shanghai");
   test( 61.4208,  165.6336, "Asia/Kamchatka");
   test( 31.5990,  110.1621, "Asia/Shanghai");
@@ -503,7 +503,7 @@ describe("tz-lookup", () => {
   test( 57.5957,   83.7790, "Asia/Tomsk");
   test( 62.4294, -160.5397, "America/Anchorage");
   test(  5.2829,   35.5583, "Africa/Juba");
-  test( 52.1639,  -71.8402, "America/Montreal");
+  test( 52.1639,  -71.8402, "America/Toronto");
   test( 38.9473,   90.3155, "Asia/Urumqi");
   test( 49.7176, -120.6521, "America/Vancouver");
   test( 25.6025,  -99.0005, "America/Monterrey");
@@ -540,7 +540,7 @@ describe("tz-lookup", () => {
   test( 69.5304,   85.2865, "Asia/Krasnoyarsk");
   test( 36.6934,  113.5059, "Asia/Shanghai");
   test( 17.4480,   49.6467, "Asia/Aden");
-  test( 46.8508,  -75.1992, "America/Montreal");
+  test( 46.8508,  -75.1992, "America/Toronto");
   test( 71.4531,  -46.1878, "America/Godthab");
   test( 14.5328,   20.0108, "Africa/Ndjamena");
   test( 49.0779,  105.2610, "Asia/Ulaanbaatar");
