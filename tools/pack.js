@@ -41,7 +41,6 @@ function force_urban(lat, lon, buffer) {
 
 function fine(urban_data, urban_x, urban_y, tz_data, tz_x, tz_y, size) {
   const tz_width = width / 4;
-  const tz_height = height / 4;
 
   /* Generate a histogram of the relative frequency of timezones in the tile. */
   const map = new Map();
@@ -150,7 +149,8 @@ function coarse() {
 function pack(root) {
   const list = [];
 
-  for(const queue = [root]; queue.length; ) {
+  const queue = [root];
+  while(queue.length) {
     const node = queue.shift();
 
     node.index = list.length;

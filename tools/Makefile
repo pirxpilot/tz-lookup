@@ -1,5 +1,8 @@
 all: tz.bin
 
+check:
+	../node_modules/.bin/jshint pack.js
+
 # get data
 
 VERSION=2017c
