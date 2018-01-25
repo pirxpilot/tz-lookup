@@ -1,4 +1,10 @@
 
+7.0.4 / 2018-01-24
+==================
+
+ * upgrade data to 2017c
+ * remove hack used to fix Page, AZ timezone
+
 7.0.3 / 2017-09-04
 ==================
 
