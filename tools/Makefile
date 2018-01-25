@@ -1,8 +1,11 @@
 all: tz.bin
 
+check:
+	../node_modules/.bin/jshint pack.js
+
 # get data
 
-VERSION=2017a
+VERSION=2017c
 CULTURAL_URL=http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural
 
 timezones.geojson.zip:
@@ -87,4 +90,6 @@ ne_10m_populated_places_simple.json: ne_10m_populated_places_simple.shp ne_10m_p
 tz.bin: $(TZ_FILES_PGM) ne_10m_populated_places_simple.json ne_10m_urban_areas.pbm
 	node pack
 
-#rm -rf ne_10m_populated_places_simple.json ne_10m_urban_areas.pbm tz_a.pgm tz_b.pgm tz_c.pgm tz_d.pgm tz_e.pgm tz_f.pgm tz_g.pgm tz_h.pgm
+# -X option removes files specified in .gitignore
+clean:
+	git clean --force -X
