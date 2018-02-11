@@ -76,6 +76,11 @@ describe("tz-lookup", () => {
   test( 65.5280,   23.5570, "Europe/Stockholm");
   // Saint-Germain-des-Vaux, France
   test( 49.7261,   -1.9104, "Europe/Paris");
+  // Mexico Beach, FL
+  test( 29.9414,  -85.4064, "America/Chicago");
+  // Kingston, TN
+  test( 35.8722,  -84.5250, "America/New_York");
+
 
 
   /* Sanity-check international waters. */

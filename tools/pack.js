@@ -125,6 +125,8 @@ function coarse() {
   force_urban(50.7029, -57.3511, urban_data);
   force_urban(65.5280,  23.5570, urban_data); // Malören, Kalix Archipelago
   force_urban(49.7261,  -1.9104, urban_data); // Saint-Germain-des-Vaux, France
+  force_urban(29.9414,  -85.4064, urban_data); // Mexico Beach, FL
+  force_urban(35.8722,  -84.5250, urban_data); // Kingston, TN
 
   const tz_data = Buffer.allocUnsafe((width / 4) * (height / 2) * 2);
   for(let y = 0; y < 2; y++) {
