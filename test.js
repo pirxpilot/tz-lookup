@@ -78,6 +78,8 @@ describe("tz-lookup", () => {
   test( 49.7261,   -1.9104, "Europe/Paris");
   // Mexico Beach, FL
   test( 29.9414,  -85.4064, "America/Chicago");
+  // Kingston, TN
+  test( 35.8722,  -84.5250, "America/New_York");
 
 
 
