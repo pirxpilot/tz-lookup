@@ -80,8 +80,8 @@ describe("tz-lookup", () => {
   test( 29.9414,  -85.4064, "America/Chicago");
   // Kingston, TN
   test( 35.8722,  -84.5250, "America/New_York");
-
-
+  // Grand Portage, MN
+  test( 47.9637,  -89.6848, "America/Chicago");
 
   /* Sanity-check international waters. */
   test(-65, -180, "Etc/GMT+12");
