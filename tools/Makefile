@@ -5,7 +5,7 @@ check:
 
 # get data
 
-VERSION=2017c
+VERSION=2018d
 CULTURAL_URL=http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural
 
 timezones.geojson.zip:
