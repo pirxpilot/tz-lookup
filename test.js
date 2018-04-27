@@ -82,6 +82,8 @@ describe("tz-lookup", () => {
   test( 35.8722,  -84.5250, "America/New_York");
   // Grand Portage, MN
   test( 47.9637,  -89.6848, "America/Chicago");
+  // Paringa SA, Australia
+  test( -34.1762,  140.7845, "Australia/Adelaide");
 
   /* Sanity-check international waters. */
   test(-65, -180, "Etc/GMT+12");
