@@ -74,6 +74,15 @@ describe("tz-lookup", () => {
   test( 36.1170, -111.9501, "America/Phoenix"); // Cape Royal
   // Malören, Kalix Archipelago
   test( 65.5280,   23.5570, "Europe/Stockholm");
+  // Sweden vs. Finnland islands
+  test( 60.0961,   18.7970, "Europe/Stockholm"); // #23 (Grisslehamn)
+  test( 59.9942,   18.7794, "Europe/Stockholm"); // #23 (Ortala)
+  test( 59.0500,   15.0412, "Europe/Stockholm"); // #23 (Tomta)
+  test( 60.0270,   18.7594, "Europe/Stockholm"); // #23 (Björkkulla)
+  test( 60.0779,   18.8102, "Europe/Stockholm"); // #23 (Kvarnsand)
+  test( 60.0239,   18.7625, "Europe/Stockholm"); // #23 (Semmersby)
+  test( 59.9983,   18.8548, "Europe/Stockholm"); // #23 (Gamla Grisslehamn)
+
   // Saint-Germain-des-Vaux, France
   test( 49.7261,   -1.9104, "Europe/Paris");
   // Mexico Beach, FL
