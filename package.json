@@ -7,14 +7,12 @@
     "timezone",
     "time zone"
   ],
-  "author": {
-    "name": "The Dark Sky Company",
-    "email": "developer@darksky.net"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/pirxpilot/tz-lookup.git"
-  },
+  "author": "The Dark Sky Company <developer@darksky.net>",
+  "contributors": [
+    "Damian Krzeminski <pirxpilot@furkot.com>"
+  ],
+  "license": "CC0-1.0",
+  "repository": "pirxpilot/tz-lookup.git",
   "devDependencies": {
     "browserify": "^14.1.0",
     "chai": "*",
@@ -22,7 +20,7 @@
     "mocha": "*"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "make check"
   },
   "browser": {
     "./lib/load-data": "./lib/browser-load-data"
