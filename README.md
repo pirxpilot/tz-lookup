@@ -1,3 +1,7 @@
+[![NPM version][npm-image]][npm-url]
+[![Build Status][build-image]][build-url]
+[![Dependency Status][deps-image]][deps-url]
+
 This is a fork of [tz-lookup] module. It's been gently touched to enable
 client side (in browser) usage.
 
@@ -65,3 +69,12 @@ copyright and related or neighboring rights][cc0] to this library.
 
 [cc0]: http://creativecommons.org/publicdomain/zero/1.0/
 [tz-lookup]: https://www.npmjs.com/package/tz-lookup
+
+[npm-image]: https://img.shields.io/npm/v/@pirxpilot/tz-lookup
+[npm-url]: https://npmjs.org/package/@pirxpilot/tz-lookup
+
+[build-url]: https://github.com/pirxpilot/tz-lookup/actions/workflows/check.yaml
+[build-image]: https://img.shields.io/github/workflow/status/pirxpilot/tz-lookup/check
+
+[deps-image]: https://img.shields.io/librariesio/release/npm/@pirxpilot/tz-lookup
+[deps-url]: https://libraries.io/npm/@pirxpilot%2Ftz-lookup
