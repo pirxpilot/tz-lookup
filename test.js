@@ -1,39 +1,20 @@
-"use strict";
+const assert = require('assert/strict');
+const tz = require('.');
 
-/*jshint esversion: 6, mocha: true */
-/* global chai */
-
-var expect, tz;
-
-if (typeof chai === 'undefined') {
-  expect = require("chai").expect;
-  tz     = require("./");
-} else {
-
-  expect = chai.expect;
-  tz     = require("tz-lookup");
-}
-
+/*jshint mocha: true */
 
 function test(lat, lon, tzid) {
-  it("should return \"" + tzid + "\" given " + lat + ", " + lon, () => {
-    expect(tz(lat, lon)).to.equal(tzid);
-  });
+  const msg = `should return "${tzid}" given ${lat}, ${lon}`;
+  it(msg, () => assert.equal(tz(lat, lon), tzid, msg));
 }
 
 function errorTest(lat, lon) {
-  it("should throw an error given " + lat + ", " + lon, () => {
-    try {
-      tz(lat, lon);
-    }
-    catch(ex) {
-      expect(ex).
-        to.have.a.property("message").
-        that.equals("invalid coordinates");
-      return;
-    }
-    throw new Error("Should not get here.");
-  });
+  const msg = `should throw an error given ${lat}, ${lon}`;
+  const exception = {
+    name: 'RangeError',
+    message: 'invalid coordinates'
+  };
+  it(msg, () => assert.throws(() => tz(lat, lon), exception, msg));
 }
 
 describe("tz-lookup", () => {
