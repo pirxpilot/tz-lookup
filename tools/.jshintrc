@@ -2,7 +2,6 @@
   "undef": true,
   "unused": true,
   "laxbreak": true,
-  "strict": "global",
   "node": true,
-  "esversion": 6
+  "esversion": 11
 }

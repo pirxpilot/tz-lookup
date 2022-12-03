@@ -1,11 +1,8 @@
-*.pgm
-*.pbm
-*.tiff
 *.zip
 *.bin
 *.shp
 *.shx
-dist
-ne_10m_populated_places_simple.json
+combined.json
+ne_10m_urban_areas.json
 tz.json
-tz_indexed.json
+tz_data.json
