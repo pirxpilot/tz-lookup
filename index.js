@@ -5,18 +5,39 @@ const FINE_WIDTH = 2;
 const FINE_HEIGHT = 2;
 const COARSE = COARSE_WIDTH * COARSE_HEIGHT;
 
+module.exports = {
+  tz,
+  tzAsync,
+  init
+};
 
 const loadData = require('./lib/load-data');
 
+let promiseDATA = loadData();
 let DATA;
 
 const LEN = 65536 - TIMEZONE_LIST.length;
 
-function tzlookup(lat, lon) {
+async function init() {
   if (!DATA) {
-    return;
+    DATA = await promiseDATA;
   }
+}
 
+function tz(lat, lon) {
+  if (DATA) {
+    return lookup(lat, lon);
+  }
+}
+
+async function tzAsync(lat, lon) {
+  if (!DATA) {
+    await init();
+  }
+  return lookup(lat, lon);
+}
+
+function lookup(lat, lon) {
   if (!(lat >= -90.0 && lat <= +90.0 && lon >= -180.0 && lon <= +180.0)) {
     throw new RangeError("invalid coordinates");
   }
@@ -45,13 +66,3 @@ function tzlookup(lat, lon) {
   /* Once we hit a leaf, return the relevant timezone. */
   return TIMEZONE_LIST[i - LEN];
 }
-
-function init(fn) {
-  loadData((err, data) => {
-    DATA = data;
-    fn(err);
-  });
-}
-
-tzlookup.init = init;
-module.exports = tzlookup;

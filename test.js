@@ -1,11 +1,20 @@
 const assert = require('assert');
-const tz = require('.');
+const {
+  tz,
+  tzAsync,
+  init
+} = require('.');
 
 /*jshint mocha: true */
 
 function test(lat, lon, tzid) {
   const msg = `should return "${tzid}" given ${lat}, ${lon}`;
   it(msg, () => assert.equal(tz(lat, lon), tzid));
+}
+
+async function testAsync(lat, lon, tzid) {
+  const msg = `should return "${tzid}" given ${lat}, ${lon}`;
+  it(msg, async () => assert.equal(await tzAsync(lat, lon), tzid));
 }
 
 function errorTest(lat, lon) {
@@ -18,7 +27,7 @@ function errorTest(lat, lon) {
 }
 
 describe("tz-lookup", () => {
-  before(() => tz.init());
+  before(() => init());
 
   /* These tests are hand-crafted for specific locations. */
   test( 40.7092,  -74.0151, "America/New_York");
@@ -1079,3 +1088,9 @@ describe("tz-lookup", () => {
   test( 81.6416,  -30.4912, "America/Nuuk");
   test(-37.5253,  -65.2140, "America/Argentina/Salta");
 });
+
+describe("tz-lookup async", () => {
+  testAsync( 40.7092,  -74.0151, "America/New_York");
+  testAsync( 42.3668,  -71.0546, "America/New_York");
+});
+
