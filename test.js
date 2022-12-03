@@ -874,7 +874,7 @@ describe("tz-lookup", () => {
   test( 81.1039,   65.0911, "Europe/Moscow");
   test( 57.1634,  -90.2668, "America/Rankin_Inlet");
   test( 77.6601,  -70.1981, "America/Thule");
-  test( 81.0588,  -66.5886, "America/Pangnirtung");
+  test( 81.0588,  -66.5886, "America/Iqaluit");
   test( 68.8512,  171.3592, "Asia/Anadyr");
   test( 58.6908,  102.4371, "Asia/Krasnoyarsk");
   test(-88.2361,   97.1364, "Antarctica/McMurdo");
