@@ -14,15 +14,17 @@
   "license": "CC0-1.0",
   "repository": "pirxpilot/tz-lookup",
   "devDependencies": {
-    "browserify": "^14.1.0",
-    "jshint": "^2.9.4",
-    "mocha": "*"
+    "assert": "^2.0.0",
+    "browserify": "~17",
+    "jshint": "~2",
+    "mocha": "~10"
   },
   "scripts": {
     "test": "make check"
   },
   "browser": {
-    "./lib/load-data": "./lib/browser-load-data"
+    "./lib/load-data": "./lib/browser-load-data",
+    "assert": "./node_modules/assert"
   },
   "files": [
     "index.js",

@@ -1,4 +1,4 @@
-const assert = require('assert/strict');
+const assert = require('assert');
 const tz = require('.');
 
 /*jshint mocha: true */
@@ -18,7 +18,7 @@ function errorTest(lat, lon) {
 }
 
 describe("tz-lookup", () => {
-  before(done => tz.init(done));
+  before(() => tz.init());
 
   /* These tests are hand-crafted for specific locations. */
   test( 40.7092,  -74.0151, "America/New_York");
