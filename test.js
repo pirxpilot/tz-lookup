@@ -152,10 +152,6 @@ describe("tz-lookup", () => {
   test(-50,  165, "Etc/GMT-11");
   test(-60,  180, "Etc/GMT-12");
 
-  /* Strings should be allowed. */
-  test("42.3668",  "-71.0546", "America/New_York");
-  test("21.4381", "-158.0493", "Pacific/Honolulu");
-
   /* Bizarre inputs should not. */
   errorTest(100, 10);
   errorTest(10, 190);

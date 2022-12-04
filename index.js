@@ -13,11 +13,10 @@ let DATA;
 const LEN = 65536 - TIMEZONE_LIST.length;
 
 function tzlookup(lat, lon) {
-  /* Make sure lat/lon are valid numbers. (It is unusual to check for the
-   * negation of whether the values are in range, but this form works for NaNs,
-   * too!) */
-  lat = +lat;
-  lon = +lon;
+  if (!DATA) {
+    return;
+  }
+
   if (!(lat >= -90.0 && lat <= +90.0 && lon >= -180.0 && lon <= +180.0)) {
     throw new RangeError("invalid coordinates");
   }
