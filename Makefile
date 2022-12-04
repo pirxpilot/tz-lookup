@@ -23,7 +23,7 @@ lint: | node_modules
 	$(NODE_BIN)/jshint $(SRC) test.js
 
 test: | node_modules
-	$(NODE_BIN)/mocha --reporter spec
+	$(NODE_BIN)/mocha --reporter dot test.js
 
 clean:
 	rm -fr build node_modules
