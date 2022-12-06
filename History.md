@@ -1,4 +1,10 @@
 
+8.0.0 / 2022-12-06
+==================
+
+ * export async and sync versions of the API
+ * remove support for non number parameters
+
 7.0.10 / 2022-12-03
 ===================
 
