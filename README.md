@@ -21,20 +21,26 @@ To install:
     npm install tz-lookup
 
 To use:
+```javascript
+const { tz, init } = require("tz-lookup");
+await init(); // need to initialize the data
+const tz = tz(42.7235, -73.6931));
+assert(tz === "America/New_York")
+```
 
-    > var tz = require("tz-lookup");
-    > console.log(tz(42.7235, -73.6931));
-    "America/New_York"
+Or you can use async version - init is done as needed:
+```javascript
+const { tzAsync: tz } = require("tz-lookup");
+const tz = async tz(42.7235, -73.6931));
+assert(tz === "America/New_York")
+```
+
 
 **Please take note of the following:**
 
 *   The exported function call will throw an error if the latitude or longitude
-    provided are NaN or out of bounds. Otherwise, it will never throw an error
-    and will always return an IANA timezone database string. (Barring bugs.)
-*   The exported function call is synchronous. Previous versions of this module
-    were asynchronous, due to the timezone database being too large to
-    conveniently fit in memory. Thanks to very careful data compression, this
-    is no longer the case.
+    provided are out of bounds.
+    Otherwise it will return an IANA timezone database string.
 *   The timezones returned by this module are approximate: since the timezone
     database is so large, lossy compression is necessary for fast lookups. In
     particular, the compression used may be of insufficient resolution for
