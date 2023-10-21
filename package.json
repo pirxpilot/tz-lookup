@@ -18,7 +18,7 @@
   },
   "devDependencies": {
     "assert": "^2.0.0",
-    "browserify": "~17",
+    "esbuild": "^0.19.5",
     "jshint": "~2",
     "mocha": "~10"
   },
@@ -26,8 +26,7 @@
     "test": "make check"
   },
   "browser": {
-    "./lib/load-data": "./lib/browser-load-data",
-    "assert": "./node_modules/assert"
+    "./lib/load-data": "./lib/browser-load-data"
   },
   "files": [
     "index.js",

@@ -12,7 +12,15 @@ build:
 	mkdir -p $@
 
 build/build.js: node_modules $(SRC) | build
-	$(NODE_BIN)/browserify --entry ./test.js --outfile $@
+	$(NODE_BIN)/esbuild \
+		--bundle ./test.js \
+		--define:DEBUG=true \
+		--define:process.env.NODE_DEBUG='"tz-lookup"' \
+		--alias:assert=./node_modules/assert \
+		--sourcemap \
+		--outfile=$@
+
+# $(NODE_BIN)/browserify --entry ./test.js --outfile $@
 
 .DELETE_ON_ERROR: build/build.js
 
