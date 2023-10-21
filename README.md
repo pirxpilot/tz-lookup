@@ -79,7 +79,7 @@ copyright and related or neighboring rights][cc0] to this library.
 [npm-url]: https://npmjs.org/package/@pirxpilot/tz-lookup
 
 [build-url]: https://github.com/pirxpilot/tz-lookup/actions/workflows/check.yaml
-[build-image]: https://img.shields.io/github/workflow/status/pirxpilot/tz-lookup/check
+[build-image]: https://img.shields.io/github/actions/workflow/status/pirxpilot/tz-lookup/check.yaml?branch=main
 
 [deps-image]: https://img.shields.io/librariesio/release/npm/@pirxpilot/tz-lookup
 [deps-url]: https://libraries.io/npm/@pirxpilot%2Ftz-lookup
