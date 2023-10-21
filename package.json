@@ -12,7 +12,10 @@
     "Damian Krzeminski <pirxpilot@furkot.com>"
   ],
   "license": "CC0-1.0",
-  "repository": "pirxpilot/tz-lookup",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pirxpilot/tz-lookup.git"
+  },
   "devDependencies": {
     "assert": "^2.0.0",
     "browserify": "~17",
