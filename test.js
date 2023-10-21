@@ -233,7 +233,7 @@ describe("tz-lookup", () => {
   test( 13.6274,   99.6599, "Asia/Bangkok");
   test( -9.6665,  -43.4782, "America/Bahia");
   test( 17.5016,   -8.0710, "Africa/Nouakchott");
-  test( 64.1965, -116.9276, "America/Yellowknife");
+  test( 64.1965, -116.9276, "America/Edmonton");
   test( 74.0116,  -35.9084, "America/Nuuk");
   test( 28.1819,   47.1326, "Asia/Riyadh");
   test(-25.8522,  139.7641, "Australia/Brisbane");
@@ -310,7 +310,7 @@ describe("tz-lookup", () => {
   test( 62.6169,  103.2882, "Asia/Krasnoyarsk");
   test( -2.6981,  -73.2412, "America/Lima");
   test( -4.9274,  -65.3226, "America/Manaus");
-  test( 71.1648, -117.7618, "America/Yellowknife");
+  test( 71.1648, -117.7618, "America/Edmonton");
   test( 58.5594,   34.6095, "Europe/Moscow");
   test( 55.2956,   32.0908, "Europe/Moscow");
   test(-15.3693,   36.5350, "Africa/Maputo");
@@ -321,9 +321,9 @@ describe("tz-lookup", () => {
   test(-22.7467,  130.6468, "Australia/Darwin");
   test( 63.8349,  152.5360, "Asia/Magadan");
   test(-20.7583,  120.7570, "Australia/Perth");
-  test( 62.7709, -118.4994, "America/Yellowknife");
+  test( 62.7709, -118.4994, "America/Edmonton");
   test( 21.2630,   17.5662, "Africa/Ndjamena");
-  test( 63.7417, -115.2235, "America/Yellowknife");
+  test( 63.7417, -115.2235, "America/Edmonton");
   test( 81.6018,  -59.8101, "America/Nuuk");
   test(-38.1635,  -57.7626, "America/Argentina/Buenos_Aires");
   test( 36.1970, -107.8392, "America/Denver");
@@ -336,13 +336,13 @@ describe("tz-lookup", () => {
   test( 23.4918,   -4.6733, "Africa/Bamako");
   test( 23.4670,   42.9883, "Asia/Riyadh");
   test( 64.0877,   20.1457, "Europe/Stockholm");
-  test( 73.5927, -115.9105, "America/Yellowknife");
+  test( 73.5927, -115.9105, "America/Edmonton");
   test( 51.8279,  -84.3882, "America/Toronto");
   test( 56.5034, -108.7968, "America/Swift_Current");
   test( 55.2477,   64.4429, "Asia/Yekaterinburg");
   test( 79.9054,  -80.5558, "America/Iqaluit");
   test( 68.1178,  137.7878, "Asia/Vladivostok");
-  test( 75.4235,  140.6829, "Asia/Vladivostok");
+  test( 75.4235,  140.6829, "Asia/Yakutsk");
   test( 25.1553,   30.5491, "Africa/Cairo");
   test( 57.5382,   69.7678, "Asia/Yekaterinburg");
   test( 19.2966,   13.2915, "Africa/Niamey");
@@ -569,7 +569,7 @@ describe("tz-lookup", () => {
   test( 31.2644,   21.7824, "Africa/Tripoli");
   test( 57.2329,   94.6034, "Asia/Krasnoyarsk");
   test( 12.6608,  -87.2430, "America/Managua");
-  test( 63.4155, -109.7556, "America/Yellowknife");
+  test( 63.4155, -109.7556, "America/Edmonton");
   test( 41.8814, -113.9326, "America/Denver");
   test(  8.1392,   80.1801, "Asia/Colombo");
   test( 53.9195,  107.1539, "Asia/Irkutsk");
@@ -711,7 +711,7 @@ describe("tz-lookup", () => {
   test(-29.5255,  -66.7115, "America/Argentina/La_Rioja");
   test( 53.0595,  -63.1278, "America/Goose_Bay");
   test( 27.4545,   23.7945, "Africa/Tripoli");
-  test( 70.6062, -116.7796, "America/Yellowknife");
+  test( 70.6062, -116.7796, "America/Edmonton");
   test(-78.0266,   89.5463, "Antarctica/Vostok");
   test(-80.8097,   12.1054, "Antarctica/Troll");
   test(-70.7923,   71.7077, "Antarctica/Mawson");
@@ -1024,7 +1024,7 @@ describe("tz-lookup", () => {
   test( 77.4624,  -73.2223, "America/Thule");
   test( 59.8796,   14.3990, "Europe/Stockholm");
   test( 44.8390,  -92.3730, "America/Chicago");
-  test( 62.0601, -104.1887, "America/Yellowknife");
+  test( 62.0601, -104.1887, "America/Edmonton");
   test( 42.2095,   -2.4099, "Europe/Madrid");
   test(-88.0545,  -95.0714, "Antarctica/McMurdo");
   test( -5.9429,  -43.0070, "America/Fortaleza");
