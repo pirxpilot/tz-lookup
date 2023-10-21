@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8">
   <title>TZ Lookup Tests</title>
-  <link rel="stylesheet" media="all" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/10.1.0/mocha.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/10.2.0/mocha.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/10.2.0/mocha.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
   <!-- do not use github URL in production -->
@@ -13,13 +14,17 @@
   <div id="messages"></div>
   <div id="fixtures"></div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/10.1.0/mocha.min.js"></script>
   <script class="mocha-init">
     mocha.setup('bdd');
   </script>
-
+  <script>
+    function require(m) {
+      if (m === 'mocha') {
+        return { describe, it, before };
+      }
+    }
+  </script>
   <script src="build/build.js"></script>
-
   <script class="mocha-exec">
     mocha.run();
   </script>

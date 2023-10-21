@@ -13,4 +13,4 @@ jobs:
         with:
           node-version:  ${{ matrix.node }}
       - run: yarn install
-      - run: make
+      - run: make check

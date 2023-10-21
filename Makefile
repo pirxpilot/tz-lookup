@@ -16,7 +16,9 @@ build/build.js: node_modules $(SRC) | build
 		--bundle ./test.js \
 		--define:DEBUG=true \
 		--define:process.env.NODE_DEBUG='"tz-lookup"' \
-		--alias:assert=./node_modules/assert \
+		--alias:node:test=mocha \
+		--alias:node:assert=assert \
+		--external:mocha \
 		--sourcemap \
 		--outfile=$@
 
@@ -31,7 +33,7 @@ lint: | node_modules
 	$(NODE_BIN)/jshint $(SRC) test.js
 
 test: | node_modules
-	$(NODE_BIN)/mocha --reporter dot test.js
+	node --test test.js
 
 clean:
 	rm -fr build node_modules

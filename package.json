@@ -17,10 +17,9 @@
     "url": "git+https://github.com/pirxpilot/tz-lookup.git"
   },
   "devDependencies": {
-    "assert": "^2.0.0",
+    "assert": "^2.1.0",
     "esbuild": "^0.19.5",
-    "jshint": "~2",
-    "mocha": "~10"
+    "jshint": "~2"
   },
   "scripts": {
     "test": "make check"
