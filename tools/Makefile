@@ -6,7 +6,7 @@ check:
 # get data
 
 VERSION ?= 2022g
-CULTURAL_URL = http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural
+CULTURAL_URL = https://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural
 CURL = curl --no-progress-meter --location
 
 timezones.geojson.zip:
