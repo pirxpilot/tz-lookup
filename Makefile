@@ -12,7 +12,17 @@ build:
 	mkdir -p $@
 
 build/build.js: node_modules $(SRC) | build
-	$(NODE_BIN)/browserify --entry ./test.js --outfile $@
+	$(NODE_BIN)/esbuild \
+		--bundle ./test.js \
+		--define:DEBUG=true \
+		--define:process.env.NODE_DEBUG='"tz-lookup"' \
+		--alias:node:test=mocha \
+		--alias:node:assert=assert \
+		--external:mocha \
+		--sourcemap \
+		--outfile=$@
+
+# $(NODE_BIN)/browserify --entry ./test.js --outfile $@
 
 .DELETE_ON_ERROR: build/build.js
 
@@ -23,7 +33,7 @@ lint: | node_modules
 	$(NODE_BIN)/jshint $(SRC) test.js
 
 test: | node_modules
-	$(NODE_BIN)/mocha --reporter dot test.js
+	node --test test.js
 
 clean:
 	rm -fr build node_modules

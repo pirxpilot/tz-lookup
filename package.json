@@ -17,17 +17,15 @@
     "url": "git+https://github.com/pirxpilot/tz-lookup.git"
   },
   "devDependencies": {
-    "assert": "^2.0.0",
-    "browserify": "~17",
-    "jshint": "~2",
-    "mocha": "~10"
+    "@pirxpilot/jshint": "^3.0.1",
+    "assert": "^2.1.0",
+    "esbuild": "^0.19.5"
   },
   "scripts": {
     "test": "make check"
   },
   "browser": {
-    "./lib/load-data": "./lib/browser-load-data",
-    "assert": "./node_modules/assert"
+    "./lib/load-data": "./lib/browser-load-data"
   },
   "files": [
     "index.js",
