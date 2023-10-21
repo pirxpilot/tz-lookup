@@ -121,6 +121,7 @@ for (const [lat, lon] of [
 
   [47.9637,  -89.6848], // Grand Portage, MN
   [-34.1762,  140.7845], // Paringa SA, Australia
+  [-14.304965, -170.806497], // American Samoa
 ]) {
   urban_geojson.features.push({
     properties: {

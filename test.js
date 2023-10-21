@@ -133,6 +133,10 @@ describe("tz-lookup", () => {
   test( 47.9637,  -89.6848, "America/Chicago");
   // Paringa SA, Australia
   test( -34.1762,  140.7845, "Australia/Adelaide");
+  // America Samoa / Samoa
+  test(-14.267226, -170.617130, "Pacific/Pago_Pago");
+  test(-14.304965, -170.806497, "Pacific/Pago_Pago");
+  test(-14.007306, -171.445218, "Pacific/Apia");
 
   /* Sanity-check international waters. */
   test(-50, -180, "Etc/GMT+12");
