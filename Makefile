@@ -27,7 +27,8 @@ build/build.js: node_modules $(SRC) | build
 .DELETE_ON_ERROR: build/build.js
 
 node_modules: package.json
-	yarn && touch $@
+	yarn --cwd $(@D) --no-progress --frozen-lockfile --silent
+	touch $@
 
 lint: | node_modules
 	$(NODE_BIN)/jshint $(SRC) test.js
