@@ -1,4 +1,13 @@
 
+8.1.0 / 2023-10-23
+==================
+
+ * expose raw data and timezone list
+ * replace jshint with @pirxpilot/jshint
+ * replace mocha with native test runner
+ * replace browserify with esbuild
+ * update node version in github actions
+
 8.0.2 / 2023-10-21
 ==================
 
