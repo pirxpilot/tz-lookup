@@ -8,7 +8,8 @@ const COARSE = COARSE_WIDTH * COARSE_HEIGHT;
 module.exports = {
   tz,
   tzAsync,
-  init
+  init,
+  getData
 };
 
 const loadData = require('./lib/load-data');
@@ -22,6 +23,16 @@ async function init() {
   if (!DATA) {
     DATA = await promiseDATA;
   }
+}
+
+async function getData() {
+  if (!DATA) {
+    await init();
+  }
+  return {
+    TIMEZONE_LIST,
+    DATA
+  };
 }
 
 function tz(lat, lon) {
