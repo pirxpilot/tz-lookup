@@ -1,6 +1,6 @@
 const { writeFile } = require("node:fs/promises");
 
-const { addHints } = require("./lib/hints");
+const { getHints } = require("./lib/hints");
 const { normalize, box_overlap, polygon_overlap } = require("./lib/geo");
 
 const COLS = 48;
@@ -13,13 +13,19 @@ const EPS = 1e-6; // Epsilon value for floating-point equality checks.
 
 const tz_geojson = require("./combined.json");
 const urban_geojson = require("./ne_10m_urban_areas.json");
+const border_geojson = require("./border-control.json");
 
 // Make the geojson files consistent.
 normalize(tz_geojson);
 normalize(urban_geojson);
+normalize(border_geojson);
 
-// HACK: Add custom urban areas in order to fix reported errors.
-addHints(urban_geojson);
+const ALL_HINTS = [
+  ...urban_geojson.features,
+  ...border_geojson.features,
+  // HACK: Add custom urban areas in order to fix reported errors.
+  ...getHints()
+];
 
 const root = buildTree(tz_geojson);
 Promise.all([
@@ -78,21 +84,19 @@ function timezoneList(root) {
   }
 }
 
-function contains_city(min_lat, min_lon, max_lat, max_lon) {
-  for (const feature of urban_geojson.features) {
-    if (
-      box_overlap(feature, min_lat, min_lon, max_lat, max_lon) &&
-      (
-        // HACK: If there's no geometry, it's OK: these were manually added
-        // box-shaped zones and we don't want or need the polygon.
-        feature.geometry === undefined ||
-        polygon_overlap(feature, min_lat, min_lon, max_lat, max_lon) >= EPS
-      )
-    ) {
+function overlap(features, min_lat, min_lon, max_lat, max_lon) {
+  for (const feature of features) {
+    if (!box_overlap(feature, min_lat, min_lon, max_lat, max_lon)) {
+      continue;
+    }
+    if (!feature.geometry) {
+      // HACK: If there's no geometry, we only need to check for box overlap
+      return true;
+    }
+    if (polygon_overlap(feature, min_lat, min_lon, max_lat, max_lon) >= EPS) {
       return true;
     }
   }
-  return false;
 }
 
 function maritime_zone(lon) {
@@ -106,15 +110,14 @@ function tile(candidates, etc_tzid, min_lat, min_lon, max_lat, max_lon, depth) {
   const mid_lat = min_lat + (max_lat - min_lat) / 2;
   const mid_lon = min_lon + (max_lon - min_lon) / 2;
 
-  const subset = [];
-  for (const candidate of candidates) {
-    let overlap = polygon_overlap(candidate, min_lat, min_lon, max_lat, max_lon);
-    if (overlap < EPS) {
-      continue;
+  const subset = Array.from((function* () {
+    for (const candidate of candidates) {
+      const overlap = polygon_overlap(candidate, min_lat, min_lon, max_lat, max_lon);
+      if (overlap >= EPS) {
+        yield [candidate, overlap];
+      }
     }
-
-    subset.push([candidate, overlap]);
-  }
+  })());
 
   // No coverage should not happen?
   if (subset.length === 0) {
@@ -134,7 +137,7 @@ function tile(candidates, etc_tzid, min_lat, min_lon, max_lat, max_lon, depth) {
   if (
     subset[0][1] > 1 - EPS ||
     depth >= MAX_DEPTH ||
-    (depth >= MIN_DEPTH && !contains_city(min_lat, min_lon, max_lat, max_lon))
+    (depth >= MIN_DEPTH && !overlap(ALL_HINTS, min_lat, min_lon, max_lat, max_lon))
   ) {
     const a = subset[0][0].properties.tzid;
 
@@ -207,4 +210,3 @@ function by_coverage_and_tzid([a, a_coverage], [b, b_coverage]) {
 
   return a.properties.tzid.localeCompare(b.properties.tzid);
 }
-

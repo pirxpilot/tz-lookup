@@ -1,7 +1,8 @@
 const URBAN_HACK_RADIUS = 720 / 49152;
 
 module.exports = {
-  addHints
+  getHints,
+  pad
 };
 
 const HINTS = [
@@ -66,15 +67,18 @@ const HINTS = [
 ];
 
 
-function addHints({ features }) {
-  for (const [lat, lon] of HINTS) {
-    features.push({
-      properties: {
-        min_lat: lat - URBAN_HACK_RADIUS,
-        min_lon: lon - URBAN_HACK_RADIUS,
-        max_lat: lat + URBAN_HACK_RADIUS,
-        max_lon: lon + URBAN_HACK_RADIUS,
-      },
-    });
-  }
+function getHints() {
+  return HINTS.map(pad);
+}
+
+function pad([lat, lon]) {
+  return {
+    geometry: false,
+    properties: {
+      min_lat: lat - URBAN_HACK_RADIUS,
+      min_lon: lon - URBAN_HACK_RADIUS,
+      max_lat: lat + URBAN_HACK_RADIUS,
+      max_lon: lon + URBAN_HACK_RADIUS,
+    }
+  };
 }

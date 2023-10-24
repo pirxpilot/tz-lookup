@@ -1,3 +1,5 @@
+const { pad } = require('./hints');
+
 module.exports = {
   normalize,
   box_overlap,
@@ -8,6 +10,32 @@ function normalize(geojson) {
   for (const feature of geojson.features) {
     // Ensure all features are MultiPolygons.
     switch (feature.geometry.type) {
+      case "Point":
+        Object.assign(feature, pad(feature.geometry.coordinates));
+        continue;
+      case "LineString": {
+        // Add properties representing the bounding box of the timezone.
+        let min_lat = 90;
+        let min_lon = 180;
+        let max_lat = -90;
+        let max_lon = -180;
+        for (const [lon, lat] of feature.geometry.coordinates) {
+          if (lat < min_lat) { min_lat = lat; }
+          if (lon < min_lon) { min_lon = lon; }
+          if (lat > max_lat) { max_lat = lat; }
+          if (lon > max_lon) { max_lon = lon; }
+        }
+        Object.assign(feature, {
+          geometry: false,
+          properties: {
+            min_lat,
+            min_lon,
+            max_lat,
+            max_lon
+          }
+        });
+        continue;
+      }
       case "MultiPolygon":
         break;
       case "Polygon":
@@ -58,8 +86,6 @@ function box_overlap(feature, min_lat, min_lon, max_lat, max_lon) {
     max_lat >= feature.properties.min_lat &&
     max_lon >= feature.properties.min_lon;
 }
-
-
 
 function polygon_overlap(feature, min_lat, min_lon, max_lat, max_lon) {
   let total = 0;
@@ -141,3 +167,4 @@ function clip(polygon, min_lat, min_lon, max_lat, max_lon) {
 
   return p;
 }
+
