@@ -2,6 +2,7 @@
 *.bin
 *.shp
 *.shx
+border-control.json
 combined.json
 ne_10m_urban_areas.json
 tz.json
