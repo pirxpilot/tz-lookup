@@ -1,4 +1,12 @@
 
+8.2.0 / 2023-10-25
+==================
+
+ * upgrade dataset with border crossing hints
+ * add Muczne, PL to hints
+ * add border_control to hints
+ * reorganize pack code
+
 8.1.0 / 2023-10-23
 ==================
 
