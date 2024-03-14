@@ -213,7 +213,7 @@ describe("tz-lookup", () => {
   test(-17.2287,   33.9961, "Africa/Maputo");
   test( 68.3552, -149.0941, "America/Anchorage");
   test( 40.8713,   86.7712, "Asia/Urumqi");
-  test( 58.9104, -108.2242, "America/Swift_Current");
+  test( 58.9104, -108.2242, "America/Regina");
   test( 63.9166,   56.0705, "Europe/Moscow");
   test( 54.7639,   41.9429, "Europe/Moscow");
   test( 81.8413,  -73.2339, "America/Iqaluit");
@@ -342,7 +342,7 @@ describe("tz-lookup", () => {
   test( 64.0877,   20.1457, "Europe/Stockholm");
   test( 73.5927, -115.9105, "America/Edmonton");
   test( 51.8279,  -84.3882, "America/Toronto");
-  test( 56.5034, -108.7968, "America/Swift_Current");
+  test( 56.5034, -108.7968, "America/Regina");
   test( 55.2477,   64.4429, "Asia/Yekaterinburg");
   test( 79.9054,  -80.5558, "America/Iqaluit");
   test( 68.1178,  137.7878, "Asia/Vladivostok");
