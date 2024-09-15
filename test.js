@@ -359,7 +359,7 @@ describe("tz-lookup", () => {
   test( 78.2319,  -35.9009, "America/Nuuk");
   test( 50.4043,   20.1115, "Europe/Warsaw");
   test( 67.7007, -139.1173, "America/Dawson");
-  test( 46.7656,   96.6875, "Asia/Hovd");
+  test( 46.7656,   96.6875, "Asia/Ulaanbaatar");
   test(-22.5825,   29.4276, "Africa/Johannesburg");
   test( 59.9827,   92.8622, "Asia/Krasnoyarsk");
   test( 32.2351,   74.7128, "Asia/Karachi");
@@ -843,7 +843,7 @@ describe("tz-lookup", () => {
   test( 10.9729,  104.4684, "Asia/Phnom_Penh");
   test( 23.1465,   85.6926, "Asia/Kolkata");
   test( 79.2684,  -76.1920, "America/Iqaluit");
-  test( 48.3757,  113.5456, "Asia/Choibalsan");
+  test( 48.3757,  113.5456, "Asia/Ulaanbaatar");
   test( 60.9356,  -92.9832, "America/Rankin_Inlet");
   test(-22.5920,  -52.6535, "America/Sao_Paulo");
   test( 31.4510,  -87.0409, "America/Chicago");
