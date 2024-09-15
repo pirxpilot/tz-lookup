@@ -1,6 +1,6 @@
 {
   "name": "@pirxpilot/tz-lookup",
-  "version": "8.2.0",
+  "version": "8.2.1",
   "description": "fast time zone lookup",
   "keywords": [
     "tz",
