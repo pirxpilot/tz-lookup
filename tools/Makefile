@@ -27,11 +27,11 @@ ne_10m_urban_areas.json: ne_10m_urban_areas.shp ne_10m_urban_areas.shx
 # and, for good measure, populated places
 %.shp: %.zip
 	unzip $< $@
-	touch $@ --reference $<
+	touch --reference=$< $@
 
 %.shx: %.zip
 	unzip $< $@
-	touch $@ --reference $<
+	touch --reference=$< $@
 
 
 tz_data.json: combined.json ne_10m_urban_areas.json
@@ -39,7 +39,6 @@ tz_data.json: combined.json ne_10m_urban_areas.json
 
 tz.bin: tz_data.json
 	node write
-
 
 # -X option removes files specified in .gitignore
 clean:
