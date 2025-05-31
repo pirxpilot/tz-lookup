@@ -31,7 +31,10 @@ node_modules: package.json
 	touch $@
 
 lint: | node_modules
-	$(NODE_BIN)/jshint $(SRC) test.js
+	$(NODE_BIN)/biome ci
+
+format: | node_modules
+	$(NODE_BIN)/biome check --fix
 
 test: | node_modules
 	node --test test.js
@@ -39,4 +42,4 @@ test: | node_modules
 clean:
 	rm -fr build node_modules
 
-.PHONY: clean lint check all compile test
+.PHONY: clean format lint check all compile test
