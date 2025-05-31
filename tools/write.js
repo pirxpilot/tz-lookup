@@ -1,5 +1,5 @@
 const assert = require('assert');
-const fs = require('fs');
+const fs = require('node:fs');
 
 const tz_list = require('./tz.json');
 const tz_data = require('./tz_data.json');
@@ -21,8 +21,7 @@ function pack(root) {
     for (let i = 0; i < node.length; i++) {
       if (Array.isArray(node[i])) {
         queue.push(node[i]);
-      }
-      else {
+      } else {
         node[i] = tz_2_index.get(node[i]);
       }
     }
@@ -30,13 +29,11 @@ function pack(root) {
 
   const buffer = Buffer.allocUnsafe(2 * (24 * 48 + (list.length - 1) * 4));
   let off = 0;
-  for(let i = 0; i < list.length; i++) {
+  for (let i = 0; i < list.length; i++) {
     const a = list[i];
-    for(let j = 0; j < a.length; j++) {
+    for (let j = 0; j < a.length; j++) {
       const b = a[j];
-      const value = Array.isArray(b) ?
-        b.index - a.index - 1 :
-        65536 - tz_list.length + b;
+      const value = Array.isArray(b) ? b.index - a.index - 1 : 65536 - tz_list.length + b;
 
       buffer.writeUIntBE(value, off, 2);
       off += 2;

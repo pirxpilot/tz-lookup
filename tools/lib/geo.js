@@ -10,20 +10,28 @@ function normalize(geojson) {
   for (const feature of geojson.features) {
     // Ensure all features are MultiPolygons.
     switch (feature.geometry.type) {
-      case "Point":
+      case 'Point':
         Object.assign(feature, pad(feature.geometry.coordinates));
         continue;
-      case "LineString": {
+      case 'LineString': {
         // Add properties representing the bounding box of the timezone.
         let min_lat = 90;
         let min_lon = 180;
         let max_lat = -90;
         let max_lon = -180;
         for (const [lon, lat] of feature.geometry.coordinates) {
-          if (lat < min_lat) { min_lat = lat; }
-          if (lon < min_lon) { min_lon = lon; }
-          if (lat > max_lat) { max_lat = lat; }
-          if (lon > max_lon) { max_lon = lon; }
+          if (lat < min_lat) {
+            min_lat = lat;
+          }
+          if (lon < min_lon) {
+            min_lon = lon;
+          }
+          if (lat > max_lat) {
+            max_lat = lat;
+          }
+          if (lon > max_lon) {
+            max_lon = lon;
+          }
         }
         Object.assign(feature, {
           geometry: false,
@@ -36,14 +44,14 @@ function normalize(geojson) {
         });
         continue;
       }
-      case "MultiPolygon":
+      case 'MultiPolygon':
         break;
-      case "Polygon":
-        feature.geometry.type = "MultiPolygon";
+      case 'Polygon':
+        feature.geometry.type = 'MultiPolygon';
         feature.geometry.coordinates = [feature.geometry.coordinates];
         break;
       default:
-        throw new Error("unrecognized type " + feature.geometry.type);
+        throw new Error('unrecognized type ' + feature.geometry.type);
     }
 
     // geojson includes duplicate vertices at the beginning and end of each
@@ -66,10 +74,10 @@ function normalize(geojson) {
     let max_lon = -180;
     for (const [vertices] of feature.geometry.coordinates) {
       for (const [lon, lat] of vertices) {
-        if (lat < min_lat) { min_lat = lat; }
-        if (lon < min_lon) { min_lon = lon; }
-        if (lat > max_lat) { max_lat = lat; }
-        if (lon > max_lon) { max_lon = lon; }
+        if (lat < min_lat) min_lat = lat;
+        if (lon < min_lon) min_lon = lon;
+        if (lat > max_lat) max_lat = lat;
+        if (lon > max_lon) max_lon = lon;
       }
     }
 
@@ -81,10 +89,12 @@ function normalize(geojson) {
 }
 
 function box_overlap(feature, min_lat, min_lon, max_lat, max_lon) {
-  return min_lat <= feature.properties.max_lat &&
+  return (
+    min_lat <= feature.properties.max_lat &&
     min_lon <= feature.properties.max_lon &&
     max_lat >= feature.properties.min_lat &&
-    max_lon >= feature.properties.min_lon;
+    max_lon >= feature.properties.min_lon
+  );
 }
 
 function polygon_overlap(feature, min_lat, min_lon, max_lat, max_lon) {
@@ -118,8 +128,8 @@ function clip(polygon, min_lat, min_lon, max_lat, max_lon) {
   for (let i = 0; i < p.length; i++) {
     const a = b;
     b = p[i];
-    if ((a[0] >= min_lon) !== (b[0] >= min_lon)) {
-      q.push([min_lon, a[1] + (b[1] - a[1]) * (min_lon - a[0]) / (b[0] - a[0])]);
+    if (a[0] >= min_lon !== b[0] >= min_lon) {
+      q.push([min_lon, a[1] + ((b[1] - a[1]) * (min_lon - a[0])) / (b[0] - a[0])]);
     }
     if (b[0] >= min_lon) {
       q.push(b);
@@ -131,8 +141,8 @@ function clip(polygon, min_lat, min_lon, max_lat, max_lon) {
   for (let i = 0; i < q.length; i++) {
     const a = b;
     b = q[i];
-    if ((a[1] >= min_lat) !== (b[1] >= min_lat)) {
-      p.push([a[0] + (b[0] - a[0]) * (min_lat - a[1]) / (b[1] - a[1]), min_lat]);
+    if (a[1] >= min_lat !== b[1] >= min_lat) {
+      p.push([a[0] + ((b[0] - a[0]) * (min_lat - a[1])) / (b[1] - a[1]), min_lat]);
     }
     if (b[1] >= min_lat) {
       p.push(b);
@@ -144,8 +154,8 @@ function clip(polygon, min_lat, min_lon, max_lat, max_lon) {
   for (let i = 0; i < p.length; i++) {
     const a = b;
     b = p[i];
-    if ((a[0] <= max_lon) !== (b[0] <= max_lon)) {
-      q.push([max_lon, a[1] + (b[1] - a[1]) * (max_lon - a[0]) / (b[0] - a[0])]);
+    if (a[0] <= max_lon !== b[0] <= max_lon) {
+      q.push([max_lon, a[1] + ((b[1] - a[1]) * (max_lon - a[0])) / (b[0] - a[0])]);
     }
     if (b[0] <= max_lon) {
       q.push(b);
@@ -157,8 +167,8 @@ function clip(polygon, min_lat, min_lon, max_lat, max_lon) {
   for (let i = 0; i < q.length; i++) {
     const a = b;
     b = q[i];
-    if ((a[1] <= max_lat) !== (b[1] <= max_lat)) {
-      p.push([a[0] + (b[0] - a[0]) * (max_lat - a[1]) / (b[1] - a[1]), max_lat]);
+    if (a[1] <= max_lat !== b[1] <= max_lat) {
+      p.push([a[0] + ((b[0] - a[0]) * (max_lat - a[1])) / (b[1] - a[1]), max_lat]);
     }
     if (b[1] <= max_lat) {
       p.push(b);
@@ -167,4 +177,3 @@ function clip(polygon, min_lat, min_lon, max_lat, max_lon) {
 
   return p;
 }
-

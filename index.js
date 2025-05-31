@@ -1,4 +1,4 @@
-const TIMEZONE_LIST = require("./data/tz.json");
+const TIMEZONE_LIST = require('./data/tz.json');
 const COARSE_WIDTH = 48;
 const COARSE_HEIGHT = 24;
 const FINE_WIDTH = 2;
@@ -14,7 +14,7 @@ module.exports = {
 
 const loadData = require('./lib/load-data');
 
-let promiseDATA = loadData();
+const promiseDATA = loadData();
 let DATA;
 
 const LEN = 65536 - TIMEZONE_LIST.length;
@@ -50,15 +50,15 @@ async function tzAsync(lat, lon) {
 
 function lookup(lat, lon) {
   if (!(lat >= -90.0 && lat <= +90.0 && lon >= -180.0 && lon <= +180.0)) {
-    throw new RangeError("invalid coordinates");
+    throw new RangeError('invalid coordinates');
   }
 
   /* The root node of the tree is wider than a normal node, acting essentially
    * as a "flattened" few layers of the tree. This saves a bit of overhead,
    * since the topmost nodes will probably all be full. */
-  let x = (180.0 + lon) * COARSE_WIDTH / 360.00000000000006;
+  let x = ((180.0 + lon) * COARSE_WIDTH) / 360.00000000000006;
 
-  let y = (90.0 - lat) * COARSE_HEIGHT / 180.00000000000003;
+  let y = ((90.0 - lat) * COARSE_HEIGHT) / 180.00000000000003;
   let u = x | 0;
   let v = y | 0;
   let t = -1;
