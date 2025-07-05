@@ -1,4 +1,10 @@
 
+8.2.3 / 2025-07-05
+==================
+
+ * add hints for Canadian Maritime provinces
+ * use `biome` as a linter and formatter
+
 8.2.2 / 2025-04-06
 ==================
 
