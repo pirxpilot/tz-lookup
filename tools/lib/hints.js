@@ -64,7 +64,9 @@ const HINTS = [
   [47.9637, -89.6848],
   [-34.1762, 140.7845],
   [-14.304965, -170.806497], // American Samoa
-  [49.129274, 22.744102] // Muczne, PL
+  [49.129274, 22.744102], // Muczne, PL
+  [46.763056, -56.174167], // Saint-Pierre Pointe-Blanche Airport
+  [51.443014, -57.185941] // Blanc Sablon
 ];
 
 function getHints() {
