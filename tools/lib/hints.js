@@ -65,6 +65,7 @@ const HINTS = [
   [-34.1762, 140.7845],
   [-14.304965, -170.806497], // American Samoa
   [49.129274, 22.744102], // Muczne, PL
+  [47.112963, -56.38469], // Miquelon Island
   [46.763056, -56.174167], // Saint-Pierre Pointe-Blanche Airport
   [51.443014, -57.185941] // Blanc Sablon
 ];
