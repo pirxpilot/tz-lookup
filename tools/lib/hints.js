@@ -1,3 +1,5 @@
+const airports = require('../airports.json');
+
 const URBAN_HACK_RADIUS = 720 / 49152;
 
 module.exports = {
@@ -71,7 +73,7 @@ const HINTS = [
 ];
 
 function getHints() {
-  return HINTS.map(pad);
+  return [...HINTS, ...airports].map(pad);
 }
 
 function pad([lat, lon]) {
