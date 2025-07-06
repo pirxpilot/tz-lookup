@@ -136,10 +136,11 @@ describe('tz-lookup', () => {
 
   // Canada Maritimes
   test(46.763056, -56.174167, 'America/Miquelon');
+  test(47.112963, -56.38469, 'America/Miquelon');
+  test(46.78038, -56.171084, 'America/Miquelon');
   test(51.443014, -57.185941, 'America/Blanc-Sablon');
   test(51.465559, -57.176144, 'America/Blanc-Sablon');
   test(51.424487, -57.822311, 'America/Blanc-Sablon');
-  test(46.78038, -56.171084, 'America/Miquelon');
   test(47.564683, -52.706695, 'America/St_Johns');
 
   /* Sanity-check international waters. */
