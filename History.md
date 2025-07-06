@@ -1,4 +1,10 @@
 
+8.2.4 / 2025-07-06
+==================
+
+ * add airports coordinates to the list of hints
+ * add hints for Miquelon Island
+
 8.2.3 / 2025-07-05
 ==================
 
