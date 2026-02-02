@@ -1,4 +1,11 @@
 
+9.0.0 / 2026-02-01
+==================
+
+ * transition to ESM format
+ * upgrade `biome` to 2.3.13
+ * upgrade `esbuild` to 0.27.2
+
 8.2.4 / 2025-07-06
 ==================
 
