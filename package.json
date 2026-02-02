@@ -12,6 +12,14 @@
     "Damian Krzeminski <pirxpilot@furkot.com>"
   ],
   "license": "CC0-1.0",
+  "type": "module",
+  "exports": "./index.js",
+  "imports": {
+    "#load-data": {
+      "node": "./lib/load-data.js",
+      "default": "./lib/browser-load-data.js"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pirxpilot/tz-lookup.git"
@@ -23,9 +31,6 @@
   },
   "scripts": {
     "test": "make check"
-  },
-  "browser": {
-    "./lib/load-data": "./lib/browser-load-data"
   },
   "files": [
     "index.js",

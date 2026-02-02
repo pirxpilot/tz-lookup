@@ -1,7 +1,6 @@
-const { describe, before, it } = require('node:test');
-const assert = require('node:assert');
-
-const { tz, tzAsync, init } = require('./index.js');
+import assert from 'node:assert';
+import { before, describe, it } from 'node:test';
+import { init, tz, tzAsync } from './index.js';
 
 function test(lat, lon, tzid) {
   const msg = `should return "${tzid}" given ${lat}, ${lon}`;

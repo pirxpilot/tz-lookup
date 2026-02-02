@@ -1,31 +1,24 @@
-const TIMEZONE_LIST = require('./data/tz.json');
+import loadData from '#load-data';
+import TIMEZONE_LIST from './data/tz.json' with { type: 'json' };
+
 const COARSE_WIDTH = 48;
 const COARSE_HEIGHT = 24;
 const FINE_WIDTH = 2;
 const FINE_HEIGHT = 2;
 const COARSE = COARSE_WIDTH * COARSE_HEIGHT;
 
-module.exports = {
-  tz,
-  tzAsync,
-  init,
-  getData
-};
-
-const loadData = require('./lib/load-data.js');
-
 const promiseDATA = loadData();
 let DATA;
 
 const LEN = 65536 - TIMEZONE_LIST.length;
 
-async function init() {
+export async function init() {
   if (!DATA) {
     DATA = await promiseDATA;
   }
 }
 
-async function getData() {
+export async function getData() {
   if (!DATA) {
     await init();
   }
@@ -35,13 +28,13 @@ async function getData() {
   };
 }
 
-function tz(lat, lon) {
+export function tz(lat, lon) {
   if (DATA) {
     return lookup(lat, lon);
   }
 }
 
-async function tzAsync(lat, lon) {
+export async function tzAsync(lat, lon) {
   if (!DATA) {
     await init();
   }

@@ -1,19 +1,19 @@
-const { writeFile } = require('node:fs/promises');
-
-const { getHints } = require('./lib/hints.js');
-const { normalize, box_overlap, polygon_overlap } = require('./lib/geo.js');
+import { writeFile } from 'node:fs/promises';
+import { box_overlap, normalize, polygon_overlap } from './lib/geo.js';
+import { getHints } from './lib/hints.js';
 
 const COLS = 48;
 const ROWS = 24;
 const MIN_DEPTH = 3; // Minimum recursion depth to allow lossy compression.
 const MAX_DEPTH = 10; // Maximum recursion depth (forcing lossy compression).
 const EPS = 1e-6; // Epsilon value for floating-point equality checks.
+
 // NOTE: This value (~0.01°) is arbitrary and ported from a prior version. It
 // could easily be tuned smaller or larger if appropriate.
 
-const tz_geojson = require('./combined.json');
-const urban_geojson = require('./ne_10m_urban_areas.json');
-const border_geojson = require('./border-control.json');
+import border_geojson from './border-control.json' with { type: 'json' };
+import tz_geojson from './combined.json' with { type: 'json' };
+import urban_geojson from './ne_10m_urban_areas.json' with { type: 'json' };
 
 // Make the geojson files consistent.
 normalize(tz_geojson);
