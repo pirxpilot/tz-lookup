@@ -1,8 +1,7 @@
-const assert = require('assert');
-const fs = require('node:fs');
-
-const tz_list = require('./tz.json');
-const tz_data = require('./tz_data.json');
+import fs from 'node:fs';
+import assert from 'assert';
+import tz_list from './tz.json' with { type: 'json' };
+import tz_data from './tz_data.json' with { type: 'json' };
 
 fs.writeFileSync('tz.bin', pack(tz_data));
 

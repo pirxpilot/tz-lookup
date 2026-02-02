@@ -1,11 +1,6 @@
-const airports = require('../airports.json');
+import airports from '../airports.json' with { type: 'json' };
 
 const URBAN_HACK_RADIUS = 720 / 49152;
-
-module.exports = {
-  getHints,
-  pad
-};
 
 const HINTS = [
   [36.8381, -84.85],
@@ -72,11 +67,11 @@ const HINTS = [
   [51.443014, -57.185941] // Blanc Sablon
 ];
 
-function getHints() {
+export function getHints() {
   return [...HINTS, ...airports].map(pad);
 }
 
-function pad([lat, lon]) {
+export function pad([lat, lon]) {
   return {
     geometry: false,
     properties: {

@@ -1,12 +1,6 @@
-const { pad } = require('./hints');
+import { pad } from './hints.js';
 
-module.exports = {
-  normalize,
-  box_overlap,
-  polygon_overlap
-};
-
-function normalize(geojson) {
+export function normalize(geojson) {
   for (const feature of geojson.features) {
     // Ensure all features are MultiPolygons.
     switch (feature.geometry.type) {
@@ -88,7 +82,7 @@ function normalize(geojson) {
   }
 }
 
-function box_overlap(feature, min_lat, min_lon, max_lat, max_lon) {
+export function box_overlap(feature, min_lat, min_lon, max_lat, max_lon) {
   return (
     min_lat <= feature.properties.max_lat &&
     min_lon <= feature.properties.max_lon &&
@@ -97,7 +91,7 @@ function box_overlap(feature, min_lat, min_lon, max_lat, max_lon) {
   );
 }
 
-function polygon_overlap(feature, min_lat, min_lon, max_lat, max_lon) {
+export function polygon_overlap(feature, min_lat, min_lon, max_lat, max_lon) {
   let total = 0;
   for (const polygon of feature.geometry.coordinates) {
     total += area(clip(polygon[0], min_lat, min_lon, max_lat, max_lon));

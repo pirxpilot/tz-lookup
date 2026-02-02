@@ -11,7 +11,7 @@ compile: build/build.js
 build:
 	mkdir -p $@
 
-build/build.js: node_modules $(SRC) | build
+build/build.js: $(SRC) | build
 	$(NODE_BIN)/esbuild \
 		--bundle ./test.js \
 		--define:DEBUG=true \
@@ -22,24 +22,18 @@ build/build.js: node_modules $(SRC) | build
 		--sourcemap \
 		--outfile=$@
 
-# $(NODE_BIN)/browserify --entry ./test.js --outfile $@
-
 .DELETE_ON_ERROR: build/build.js
 
-node_modules: package.json
-	yarn --cwd $(@D) --no-progress --frozen-lockfile --silent
-	touch $@
-
-lint: | node_modules
+lint:
 	$(NODE_BIN)/biome ci
 
-format: | node_modules
+format:
 	$(NODE_BIN)/biome check --fix
 
-test: | node_modules
+test:
 	node --test test.js
 
 clean:
-	rm -fr build node_modules
+	rm -fr build
 
 .PHONY: clean format lint check all compile test
