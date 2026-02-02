@@ -1,7 +1,7 @@
 const { writeFile } = require('node:fs/promises');
 
-const { getHints } = require('./lib/hints');
-const { normalize, box_overlap, polygon_overlap } = require('./lib/geo');
+const { getHints } = require('./lib/hints.js');
+const { normalize, box_overlap, polygon_overlap } = require('./lib/geo.js');
 
 const COLS = 48;
 const ROWS = 24;

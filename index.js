@@ -12,7 +12,7 @@ module.exports = {
   getData
 };
 
-const loadData = require('./lib/load-data');
+const loadData = require('./lib/load-data.js');
 
 const promiseDATA = loadData();
 let DATA;

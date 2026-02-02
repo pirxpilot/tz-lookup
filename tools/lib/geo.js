@@ -1,4 +1,4 @@
-const { pad } = require('./hints');
+const { pad } = require('./hints.js');
 
 module.exports = {
   normalize,
